@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
    Article.associate = (models) => {
     Article.belongsTo(models.Category),
     Article.belongsTo(models.Author),
-    Article.belongsTo(models.Reaction)
+    Article.hasMany(models.Reaction)
     
   
   };

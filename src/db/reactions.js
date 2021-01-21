@@ -22,8 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     );
   
     Reaction.associate = (models) => {
-      Reaction.hasMany(models.Article);
-      Reaction.hasMany(models.Author);
+      Reaction.belongsTo(models.Article);
+      Reaction.belongsTo(models.Author);
     };
     return Reaction;
   };

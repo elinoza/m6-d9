@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   
     Author.associate = (models) => {
       Author.hasMany(models.Article);
-      Author.belongsTo(models.Reaction)
+      Author.hasMany(models.Reaction)
     };
     return Author;
   };

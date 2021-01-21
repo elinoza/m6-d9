@@ -1,6 +1,8 @@
 const express = require("express");
 const Article = require("../../db").Article;
 const Category = require("../../db").Category;
+const Author = require("../../db").Author;
+const Reaction = require("../../db").Reaction;
 const { Op } = require("sequelize");
 const router = express.Router();
 
@@ -9,18 +11,11 @@ router
   .get(async (req, res, next) => {
     try {
       const data = await Article.findAll({
-        include: {
-          model: Category,
-          where: req.query.category
-            ? {
-                name: { [Op.iLike]: "%" + req.query.category + "%" },
-              }
-            : {},
-        },
+        include:[Author, Category,Reaction],
         where: req.query.name
           ? { head_Line: { [Op.iLike]: "%" + req.query.name + "%" } }
-          : {},
-        offset: parseInt(req.query.offset) | 0,
+          : {}
+        ,offset: parseInt(req.query.offset) | 0,
         limit: parseInt(req.query.limit) | 10,
       });
       res.send(data);
